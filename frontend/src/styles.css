@@ -93,6 +93,12 @@ mat-spinner {
   margin-right: auto;
 }
 
+.karte-body {
+  width: 100%;
+  min-height: 560px;
+  box-sizing: border-box;
+}
+
 .mat-mdc-select-panel,
 .mdc-menu-surface,
 .mat-mdc-dialog-surface,
