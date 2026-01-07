@@ -10,9 +10,12 @@ import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { PhotoUpload } from '../photo-upload/photo-upload';
 import { Camera } from '../camera/camera';
-import { Karte } from '../karte/karte';
 import { CommonModule } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
+import { Router } from '@angular/router';
+import { ReportStateService } from '../core/globalService/report-state.service';
+
+
 
 /**
  * Komponente für das Mängelmelden-Formular.
@@ -37,7 +40,6 @@ import {MatIconModule} from '@angular/material/icon';
     PhotoUpload,
     MatIconModule,
     Camera,
-    Karte,
   ],
   templateUrl: './formular.html',
   styleUrl: './formular.css',
@@ -65,10 +67,6 @@ export class Formular implements OnInit {
    **/
   @ViewChild('photoUpload') photoUpload!: PhotoUpload;
 
-  /**
-   * Referenz zur untergeordneten Karten-Komponente, um deren Methode aufzurufen.
-   */
-  @ViewChild('karteComp') karte!: Karte;
 
   /**
    * Konstruktor der Klasse.
@@ -79,7 +77,11 @@ export class Formular implements OnInit {
    * @param apiService - Service für Requests an das Backend
    * @param snackBar - Angular Material SnackBar für kurze Benachrichtigungen
    */
-  constructor(private apiService: ApiService, private snackBar: MatSnackBar) {}
+  constructor(
+    private apiService: ApiService,
+    private snackBar: MatSnackBar,
+    private reportState: ReportStateService,
+    private router: Router,) {}
 
 
   /**
@@ -116,7 +118,7 @@ export class Formular implements OnInit {
    * @param photoUpload
    */
   submitReport(photoUpload?: any): void {
-    const coords = this.karte.getCoordinates();
+    const coords = this.reportState.getLocation();
 
     if (!this.selectedCategory && this.description.trim() === '') {
       alert('Bitte wähle eine Kategorie oder gib eine Beschreibung ein!');
@@ -157,6 +159,9 @@ export class Formular implements OnInit {
         this.photoUpload.resetUploadState();
 
         this.isLoading.set(false);
+
+        this.reportState.reset();
+        this.router.navigate(['mängel/erfolg']);
       },
       error: (error) => {
         this.isLoading.set(false);
