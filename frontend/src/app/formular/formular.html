@@ -45,7 +45,7 @@
     <span class="media-title">Fotos hinzufügen (optional)</span>
     <div class="media-inner">
       <app-photo-upload #photoUpload (photosSelected)="onPhotosSelected($event)"></app-photo-upload>
-   <app-camera (photoTaken)="onPhotoFromCamera($event); onPhotoAdded($event)"></app-camera>
+   <app-camera (photosTaken)="onPhotoFromCamera($event)"></app-camera>
    </div>
   </div>
 

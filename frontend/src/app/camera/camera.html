@@ -25,23 +25,31 @@
 
     </div>
 
-    <p *ngIf="fileName" class="camera-filename" aria-live="polite">
-        Gewählt: <strong>{{ fileName }}</strong>
-    </p>
-  <div class="camera-wrapper">
-    <div *ngIf="previewData" class="camera-preview">
-        <img [src]="previewData" alt="Vorschau des gewählten Fotos" class="camera-img" />
+  <p class="camera-hint">
+    {{ selectedFiles.length }} / 3 Fotos hinzugefügt
+  </p>
+
+
+  <div class="upload-preview-grid" *ngIf="previewUrls.length > 0">
+    <div>
+      <div
+        class="gallery-wrapper camera-preview"
+        *ngFor="let url of previewUrls; let i = index"
+      >
+      <img
+        [src]="url"
+        alt="Vorschau Foto {{ i + 1 }}"
+        class="camera-img"
+      />
+
+      <button
+        type="button"
+        class="camera-delete-btn"
+        (click)="removePhoto(i)"
+        aria-label="Foto löschen"
+      >
+        ✕
+      </button>
     </div>
-
-    <button
-            *ngIf="previewData"
-            type="button"
-            class="camera-delete-btn"
-            (click)="removePhoto()"
-            aria-label="Gewähltes Foto löschen"
-    >
-      ✕
-    </button>
 </div>
 </div>
-

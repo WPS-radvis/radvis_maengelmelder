@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { Camera } from './camera';
 
 describe('Camera', () => {
@@ -20,50 +19,47 @@ describe('Camera', () => {
     expect(component).toBeTruthy();
   });
 
-  // überprüft, ob ein Event aufgerufen wurde
-  it('soll photoTaken emitten, wenn eine Datei ausgewählt wird', () => {
-    spyOn(component.photoTaken, 'emit');
+  it('soll ein Foto hinzufügen und File[] emitten', () => {
+    spyOn(component.photosTaken, 'emit');
 
-    // Mock file
-    const blob = new Blob([''], { type: 'image/png' });
-    const file = new File([blob], 'test.png');
-
-    // Mock event
+    const file = new File([new Blob()], 'test.png', { type: 'image/png' });
     const event = {
       target: {
         files: [file],
-        value: 'path to file',
+        value: '',
       },
     } as unknown as Event;
 
     component.onFileChange(event);
 
-    expect(component.fileName).toBe('test.png');
-    expect(component.photoTaken.emit).toHaveBeenCalledWith(file);
+    expect(component.selectedFiles.length).toBe(1);
+    expect(component.selectedFiles[0]).toBe(file);
+    expect(component.photosTaken.emit).toHaveBeenCalledWith([file]);
   });
 
-  it('soll photoTaken mit null emitten, wenn removePhoto aufgerufen wird', () => {
-    spyOn(component.photoTaken, 'emit');
+  it('soll ein Foto entfernen und aktualisiertes Array emitten', () => {
+    spyOn(component.photosTaken, 'emit');
 
-    // Zustand der Komponente setzen
-    component.fileName = 'test.png';
-    component.previewData = 'data:image...';
+    const file1 = new File([new Blob()], 'a.png');
+    const file2 = new File([new Blob()], 'b.png');
 
-    component.removePhoto();
+    component.selectedFiles = [file1, file2];
+    component.previewUrls = ['url1', 'url2'];
 
-    expect(component.fileName).toBe('');
-    expect(component.previewData).toBeNull();
-    expect(component.photoTaken.emit).toHaveBeenCalledWith(null);
+    component.removePhoto(0);
+
+    expect(component.selectedFiles).toEqual([file2]);
+    expect(component.previewUrls.length).toBe(1);
+    expect(component.photosTaken.emit).toHaveBeenCalledWith([file2]);
   });
 
-  it('soll null emitten, wenn Foto-Auswahl abgebrochen wird (keine Datei vorhanden', () => {
-    spyOn(component.photoTaken, 'emit');
-    // keine files
+  it('soll nichts tun, wenn keine Datei ausgewählt wird', () => {
+    spyOn(component.photosTaken, 'emit');
+
     const event = { target: { files: [] } } as unknown as Event;
-
     component.onFileChange(event);
 
-    expect(component.photoTaken.emit).toHaveBeenCalledWith(null);
-    expect(component.previewData).toBeNull();
+    expect(component.selectedFiles.length).toBe(0);
+    expect(component.photosTaken.emit).not.toHaveBeenCalled();
   });
 });
