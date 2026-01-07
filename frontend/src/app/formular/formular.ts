@@ -209,7 +209,7 @@ export class Formular implements OnInit {
    * @param photoFile - Die aufgenommene Foto-Datei oder `null`, wenn die Aufnahme
    * abgebrochen wurde oder fehlgeschlagen ist
    */
-  onPhotoFromCamera(photoFile: File | null): void {
+  onPhotoFromCamera(photoFile: File[]): void {
     if (photoFile) {
       console.log('📸 Foto von Kamera empfangen:', photoFile);
       // Später kannst du es direkt an PhotoUpload übergeben oder speichern

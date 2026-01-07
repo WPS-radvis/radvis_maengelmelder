@@ -36,12 +36,18 @@
 
   <!-- Vorschau der gewählten Bilder -->
   <div *ngIf="selectedFiles.length > 0" class="upload-preview-grid">
-    <p class="camera-filename" aria-live="polite">
+   <!-- <p class="camera-filename" aria-live="polite">
       Gewählt:
       <strong *ngFor="let file of selectedFiles; let i = index">
         {{ file.name }}<span *ngIf="i < selectedFiles.length - 1">,&nbsp;</span>
       </strong>
     </p>
+    -->
+
+    <p class="camera-hint">
+      {{ selectedFiles.length }} / 3 Fotos hinzugefügt
+    </p>
+
 
     <div>
       <div *ngFor="let url of previewUrls; let i = index" class="gallery-wrapper">
