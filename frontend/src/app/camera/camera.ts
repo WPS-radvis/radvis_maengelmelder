@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 /**
@@ -36,7 +37,13 @@ export class Camera {
    * -Emit: File → wenn ein Foto erfolgreich ausgewählt wurde
    * -Emit: File → wenn die Auswahl abgebrochen oder zurückgesetzt wurde
    */
-  @Output() photoTaken = new EventEmitter<File | null >();
+
+  selectedFiles: File[] = [];
+  previewUrls: string[] = [];
+
+  @Output() photosTaken = new EventEmitter<File[]>();
+
+  constructor(private snackBar: MatSnackBar) {}
 
   /**
    * Wird ausgelöst, wenn der Benutzer eine Datei auswählt.
@@ -51,19 +58,32 @@ export class Camera {
   onFileChange(e: Event) {
     const input = e.target as HTMLInputElement;
     const f = input.files?.[0] || null;
+
     this.fileName = f ? f.name : '';
+
     if (!f) {
-      this.previewData = null;
-      this.photoTaken.emit(null);
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => (this.previewData = reader.result as string);
-    reader.readAsDataURL(f);
+    if (this.selectedFiles.length >= 3) {
+      this.snackBar.open(
+        'Maximal 3 Bilder erlaubt. Weitere Fotos wurden nicht übernommen.',
+        'OK',
+        { duration: 3000 }
+      );
+      return;
+    }
 
-    this.photoTaken.emit(f);
-    input.value = ' ';
+    this.selectedFiles.push(f);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.previewUrls.push(reader.result as string);
+      this.photosTaken.emit(this.selectedFiles);
+    };
+
+    reader.readAsDataURL(f);
+    input.value = '';
   }
 
   /**
@@ -73,9 +93,9 @@ export class Camera {
    * - Informiert die Parent-Komponente über das Output-Event,
    *   das kein Foto mehr vorhanden ist
    */
-  removePhoto() {
-    this.fileName = '';
-    this.previewData = null;
-    this.photoTaken.emit(null);
+  removePhoto(index: number): void {
+    this.selectedFiles.splice(index, 1);
+    this.previewUrls.splice(index, 1);
+    this.photosTaken.emit(this.selectedFiles);
   }
 }
