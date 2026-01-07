@@ -163,7 +163,7 @@ export class Formular implements OnInit {
         this.isLoading.set(false);
 
         this.reportState.reset();
-        this.router.navigate(['mängel/erfolg']);
+        void this.router.navigate(['mängel/erfolg']);
       },
       error: (error) => {
         this.isLoading.set(false);

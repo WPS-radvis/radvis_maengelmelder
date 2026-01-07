@@ -1,8 +1,36 @@
 .error-card {
-  margin-top: 8px;
-  background-color: #ffebee;
-  color: #b71c1c;
+  width: 100%;
+  box-sizing: border-box;
+  background: #FEE2E2;
+  border: 1.5px solid #EF4444;
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  box-shadow: none;
 }
+
+.error-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.error-icon {
+  color: #B91C1C !important;
+  font-size: 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  flex-shrink: 0;
+}
+
+.error-card span {
+  flex: 1;
+  color: #7F1D1D;
+  text-align: left;
+  line-height: 1.5;
+}
+
 
 .success-box {
   background:#e8f5e9;
@@ -44,4 +72,36 @@
   flex: 1;
   text-align: left;
   line-height: 1.5;
+}
+
+
+.map-action-button {
+  width: 100%;
+  max-width: 360px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: none;
+
+  background: #1d6faf !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 26px rgba(29, 111, 175, 0.35);
+
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+
+.map-action-button[disabled] {
+  background: #67a4e0 !important;
+  color: #e9eef7 !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+}
+
+
+.map-action-button:not([disabled]):hover {
+  background: #00569a !important;
+  box-shadow: 0 9px 22px rgba(0, 86, 154, 0.45);
 }
