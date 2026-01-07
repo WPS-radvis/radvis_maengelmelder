@@ -238,6 +238,7 @@ export class Karte {
         this.selectedLat = lat;
         this.selectedLng = lng;
         this.currentLocation = [lat, lng];
+        this.reportState.setLocation(lat, lng);
 
         this.isLoadingLocation = false;
       },
@@ -284,7 +285,7 @@ export class Karte {
   }
 
   goToForm(): void {
-    this.router.navigate(['mängel', 'meldung']);
+    void this.router.navigate(['mängel', 'meldung']);
   }
 
 }
