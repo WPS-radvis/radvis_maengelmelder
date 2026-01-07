@@ -40,6 +40,15 @@
         </div>
       }
 
+      <button
+        mat-raised-button
+        color="primary"
+        style="margin-top: 1rem"
+        (click)="goToForm()"
+        [disabled]="!reportState.hasLocation()"
+      >
+        Meldung verfassen
+      </button>
     </div>
   </div>
 }
