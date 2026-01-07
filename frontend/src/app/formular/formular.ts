@@ -76,6 +76,8 @@ export class Formular implements OnInit {
    *
    * @param apiService - Service für Requests an das Backend
    * @param snackBar - Angular Material SnackBar für kurze Benachrichtigungen
+   * @param reportState - Frontend-State für die aktuell ausgewählte Meldung (insb. Standort)
+   * @param router - Angular Router für die Navigation zur Erfolgsseite
    */
   constructor(
     private apiService: ApiService,
