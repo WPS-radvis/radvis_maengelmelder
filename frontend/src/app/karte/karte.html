@@ -1,8 +1,7 @@
 @if (showMap) {
   <div class="karte">
-    <div class="karte-body">
-      <h3 class="karte-title">Teilen Sie Ihren Standort oder markieren Sie ihn auf der Karte</h3>
 
+    <div class="karte-body">
       @if (!hasLocation()) {
         <div class="radmelder-hinweis">
           <mat-icon class="hinweis-icon">info_outline</mat-icon>
@@ -10,23 +9,17 @@
         </div>
       }
 
-      <button
-        mat-raised-button
-        style="margin-bottom: 3%"
-        color="primary"
-        (click)="useCurrentLocation()"
-        [disabled]="isLoadingLocation"
-      >
-        {{ isLoadingLocation ? 'Standort wird ermittelt...' : 'Aktuellen Standort verwenden' }}
-      </button>
-
       @if (errorMessage) {
         <mat-card class="error-card">
-          {{ errorMessage }}
+          <div class="error-content">
+            <mat-icon class="error-icon">error_outline</mat-icon>
+            <span>{{ errorMessage }}</span>
+          </div>
         </mat-card>
       }
 
       <!-- Map -->
+      <div class="map-container">
       <div
         leaflet
         [leafletOptions]="options"
@@ -34,12 +27,35 @@
         style="height: 400px; width: 100%"
       ></div>
 
+        <button
+          mat-raised-button
+          type="button"
+          class="map-locate-button"
+          (click)="useCurrentLocation()"
+          [disabled]="isLoadingLocation"
+          aria-label="Aktuellen Standort verwenden"
+          matTooltip="Aktuellen Standort wählen"
+          matTooltipPosition="below"
+          matTooltipClass="map-tooltip"
+        >
+          <span class="map-locate-glyph"></span>
+        </button>
+      </div>
+
       @if (hasLocation()) {
         <div class="success-box">
           ✓ Standort ausgewählt: {{ formattedLat }}, {{ formattedLng }}
         </div>
       }
 
+      <button
+        mat-raised-button
+        class="map-action-button"
+        (click)="goToForm()"
+        [disabled]="!reportState.hasLocation()"
+      >
+        Meldung verfassen
+      </button>
     </div>
   </div>
 }

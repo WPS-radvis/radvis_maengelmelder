@@ -1,8 +1,36 @@
 .error-card {
-  margin-top: 8px;
-  background-color: #ffebee;
-  color: #b71c1c;
+  width: 100%;
+  box-sizing: border-box;
+  background: #FEE2E2;
+  border: 1.5px solid #EF4444;
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  box-shadow: none;
 }
+
+.error-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.error-icon {
+  color: #B91C1C !important;
+  font-size: 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  flex-shrink: 0;
+}
+
+.error-card span {
+  flex: 1;
+  color: #7F1D1D;
+  text-align: left;
+  line-height: 1.5;
+}
+
 
 .success-box {
   background:#e8f5e9;
@@ -44,4 +72,95 @@
   flex: 1;
   text-align: left;
   line-height: 1.5;
+}
+
+
+.map-action-button {
+  width: 100%;
+  max-width: 360px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: none;
+  background: #1d6faf !important;
+  color: #ffffff !important;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+
+.map-action-button[disabled] {
+  background: #67a4e0 !important;
+  color: #e9eef7 !important;
+  opacity: 1 !important;
+  cursor: not-allowed;
+}
+
+
+.map-action-button:not([disabled]):hover {
+  background: #00569a !important;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+}
+
+.map-locate-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1000;
+  min-width: 0;
+  width: 42px !important;
+  height: 42px !important;
+  padding: 0;
+  border-radius: 14px;
+  background: #e6007e !important;
+  color: #ffffff !important;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-locate-button .mdc-button__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.map-locate-glyph {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+}
+
+.map-locate-glyph::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  transform: translate(-50%, -50%);
+}
+
+.map-tooltip .mdc-tooltip__surface {
+  background: #111827;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  max-width: 180px;
+  text-align: center;
 }
