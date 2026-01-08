@@ -8,14 +8,14 @@ import {MatCard} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { ReportStateService } from '../core/globalService/report-state.service';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @Component({
   selector: 'app-karte',
   templateUrl: './karte.html',
   styleUrls: ['./karte.css'],
-  imports: [LeafletDirective, NgxLeafletLocateModule, MatButton, MatCard, MatIconModule],
+  imports: [LeafletDirective, NgxLeafletLocateModule, MatButton, MatCard, MatIconModule, MatTooltipModule],
   standalone: true,
 })
 

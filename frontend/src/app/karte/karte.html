@@ -18,23 +18,29 @@
         </mat-card>
       }
 
-      <button
-        mat-raised-button
-        style="margin-bottom: 3%"
-        color="primary"
-        (click)="useCurrentLocation()"
-        [disabled]="isLoadingLocation"
-      >
-        {{ isLoadingLocation ? 'Standort wird ermittelt...' : 'Aktuellen Standort verwenden' }}
-      </button>
-
       <!-- Map -->
+      <div class="map-container">
       <div
         leaflet
         [leafletOptions]="options"
         (leafletMapReady)="onMapReady($event)"
         style="height: 400px; width: 100%"
       ></div>
+
+        <button
+          mat-raised-button
+          type="button"
+          class="map-locate-button"
+          (click)="useCurrentLocation()"
+          [disabled]="isLoadingLocation"
+          aria-label="Aktuellen Standort verwenden"
+          matTooltip="Aktuellen Standort wählen"
+          matTooltipPosition="below"
+          matTooltipClass="map-tooltip"
+        >
+          <span class="map-locate-glyph"></span>
+        </button>
+      </div>
 
       @if (hasLocation()) {
         <div class="success-box">

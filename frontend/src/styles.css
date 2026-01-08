@@ -106,7 +106,6 @@ mat-spinner {
 
 .karte-body {
   width: 100%;
-  min-height: 560px;
   box-sizing: border-box;
   border-radius: 12px;
   overflow: hidden;
