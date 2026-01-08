@@ -25,9 +25,10 @@
 
     </div>
 
-  <p class="camera-hint">
-    {{ selectedFiles.length }} / 3 Fotos hinzugefügt
-  </p>
+  <ng-container *ngIf="previewUrls.length > 0">
+    <p class="camera-hint">
+      {{ previewUrls.length }} / 3 Fotos hinzugefügt
+    </p>
 
 
   <div class="upload-preview-grid" *ngIf="previewUrls.length > 0">
@@ -52,4 +53,6 @@
       </button>
     </div>
 </div>
+</div>
+</ng-container>
 </div>
