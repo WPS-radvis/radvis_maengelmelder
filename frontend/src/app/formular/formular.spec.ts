@@ -4,11 +4,16 @@ import { Formular } from './formular';
 import { ApiService } from '../core/globalService/api.services';
 import { of, throwError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ReportStateService } from '../core/globalService/report-state.service';
 
 describe('Formular Component', () => {
   let component: Formular;
   let fixture: ComponentFixture<Formular>;
   let apiService: ApiService;
+  let router: Router;
+  let reportState: ReportStateService;
 
   beforeEach(async () => {
     const snackBarMock = jasmine.createSpyObj('MatSnackBar', ['open']);
@@ -17,6 +22,7 @@ describe('Formular Component', () => {
       imports: [
         Formular, // Standalone Component
         HttpClientTestingModule,
+        RouterTestingModule,
       ],
       providers: [{ provide: MatSnackBar, useValue: snackBarMock }],
     }).compileComponents();
@@ -24,6 +30,10 @@ describe('Formular Component', () => {
     fixture = TestBed.createComponent(Formular);
     component = fixture.componentInstance;
     apiService = TestBed.inject(ApiService);
+
+    router = TestBed.inject(Router);
+    reportState = TestBed.inject(ReportStateService);
+    spyOn(router, 'navigate').and.returnValue(Promise.resolve(true));
 
     // HINWEIS: Der Mock für 'karte' wurde aus dem beforeEach entfernt,
     // da er nicht stabil war und in den individuellen Tests, die submitReport aufrufen,
@@ -180,9 +190,7 @@ describe('Formular Component', () => {
   });
 
   it('T5.25.1: sollte Koordinaten in FormData übernehmen', (done) => {
-    (component as any).karte = {
-      getCoordinates: () => ({ lat: 12.3, lng: 45.6 }),
-    };
+    reportState.setLocation(12.3, 45.6);
 
     component.selectedCategory = 'SCHLAGLOCH';
     component.description = 'Test';
@@ -204,9 +212,7 @@ describe('Formular Component', () => {
     });
   });
   it('T5.25.2: sollte null senden wenn keine Koordinaten gesetzt sind', (done) => {
-    (component as any).karte = {
-      getCoordinates: () => null,
-    };
+    reportState.reset();
 
     component.selectedCategory = 'SCHLAGLOCH';
     component.description = 'Test';

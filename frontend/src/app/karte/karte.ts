@@ -6,14 +6,16 @@ import { NgxLeafletLocateModule } from '@runette/ngx-leaflet-locate';
 import { MatButton } from '@angular/material/button';
 import {MatCard} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-
+import { Router } from '@angular/router';
+import { ReportStateService } from '../core/globalService/report-state.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @Component({
   selector: 'app-karte',
   templateUrl: './karte.html',
   styleUrls: ['./karte.css'],
-  imports: [LeafletDirective, NgxLeafletLocateModule, MatButton, MatCard, MatIconModule],
+  imports: [LeafletDirective, NgxLeafletLocateModule, MatButton, MatCard, MatIconModule, MatTooltipModule],
   standalone: true,
 })
 
@@ -78,6 +80,10 @@ export class Karte {
     center: latLng(this.lat_long[0], this.lat_long[1]),
   };
 
+  constructor(
+    public reportState: ReportStateService,
+    private router: Router
+  ) {}
 
   /**
    * Speichert den aktuellen Standort aus einem Leaflet-Event.
@@ -179,6 +185,7 @@ export class Karte {
 
     if (this.selectedLat !== null && this.selectedLng !== null) {
       this.setMarker(this.selectedLat, this.selectedLng);
+      this.reportState.setLocation(this.selectedLat, this.selectedLng);
     }
   }
 
@@ -231,6 +238,7 @@ export class Karte {
         this.selectedLat = lat;
         this.selectedLng = lng;
         this.currentLocation = [lat, lng];
+        this.reportState.setLocation(lat, lng);
 
         this.isLoadingLocation = false;
       },
@@ -276,5 +284,8 @@ export class Karte {
     return this.selectedLng?.toFixed(6) ?? '';
   }
 
+  goToForm(): void {
+    void this.router.navigate(['mängel', 'meldung']);
+  }
 
 }

@@ -64,11 +64,16 @@
   align-items: flex-start;
 }
 
-.camera-wrapper {
+.camera-preview {
+  position: relative;
+}
+
+.camera-preview {
   position: relative;
   display: inline-block;
   margin-bottom: 8px;
 }
+
 
 .camera-img {
   width: 120px;
