@@ -82,13 +82,11 @@
   font-weight: 500;
   font-size: 0.95rem;
   text-transform: none;
-
   background: #1d6faf !important;
   color: #ffffff !important;
   box-shadow: 0 10px 26px rgba(29, 111, 175, 0.35);
-
-  margin-top: 1rem;
-  margin-bottom: 1.25rem;
+  margin-top: 16px;
+  margin-bottom: 6px;
 }
 
 
