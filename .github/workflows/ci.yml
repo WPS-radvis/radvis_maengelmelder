@@ -5,13 +5,22 @@ on:
   pull_request:
 
 jobs:
-  frontend-tests:
+  e2e-tests:
     runs-on: ubuntu-latest
 
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
 
+      # Setup für Backend
+      - name: Java installieren
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      # Setup für Frontend
       - name: Node.js installieren
         uses: actions/setup-node@v4
         with:
@@ -23,25 +32,37 @@ jobs:
         working-directory: frontend
         run: npm ci
 
-      - name: Frontend Tests ausführen
+      - name: Playwright Browser installieren
         working-directory: frontend
-        run: npx ng test --browsers=ChromeHeadless --watch=false
+        run: npx playwright install --with-deps chromium
 
-      - name: Upload Frontend Teste Artifacts (Screenshots, Videos, Reports)
+      # Backend im Hintergrund starten
+      - name: Backend starten
+        working-directory: backend
+        run: |
+          mvn spring-boot:run -Dspring-boot.run.profiles=test > backend_log.txt 2>&1 &
+          echo "Warten auf Backend..."
+          npx wait-on http://localhost:8080/h2-console --timeout 60000
+
+      # E2E Tests ausführen
+      - name: E2E Tests ausführen
+        working-directory: frontend
+        run: npm run e2e:ci
+
+      # Artefakte hochladen
+      - name: Upload E2E Artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: frontend-e2e-artifacts
           path: |
-            frontend/e2e-test-results/test-results
-            frontend/e2e-test-results/screenshots
-            frontend/e2e-test-results/videos
-            frontend/playwright-report
-          if-no-files-found: ignore # Unterdrückt Warnungen, wenn keine Dateien gefunden werden
+            frontend/test-results/
+            frontend/playwright-report/
+            backend/backend_log.txt
+          if-no-files-found: warn
 
-  backend-tests:
+  backend-unit-tests:
     runs-on: ubuntu-latest
-
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
@@ -53,7 +74,7 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: Backend Build + Tests
+      - name: Backend Build + Unit Tests
         working-directory: backend
         run: mvn -B -ntp clean verify
 
@@ -61,7 +82,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: backend-test-reports
+          name: backend-unit-test-reports
           path: |
             backend/**/target/surefire-reports
             backend/**/target/failsafe-reports

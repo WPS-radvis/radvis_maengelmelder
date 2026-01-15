@@ -11,7 +11,7 @@ export default defineConfig({
 
   reporter: [
     ['html', { open: 'never' }],
-    ['junit', { outputFile: 'test-results/e2e-junit.xml' }],
+    ['junit', { outputFile: 'e2e-test-results/test-results/e2e-junit.xml' }],
   ],
 
   use: {
