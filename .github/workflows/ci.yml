@@ -27,13 +27,17 @@ jobs:
         working-directory: frontend
         run: npx ng test --browsers=ChromeHeadless --watch=false
 
-      - name: Test Ergebnisse hochladen
-        if: always()
+      - name: Upload Frontend Teste Artifacts (Screenshots, Videos, Reports)
         uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: frontend-test-results
-          path: frontend/test-results
-          if-no-files-found: warn
+          name: frontend-e2e-artifacts
+          path: |
+            frontend/e2e-test-results/test-results
+            frontend/e2e-test-results/screenshots
+            frontend/e2e-test-results/videos
+            frontend/playwright-report
+          if-no-files-found: ignore # Unterdrückt Warnungen, wenn keine Dateien gefunden werden
 
   backend-tests:
     runs-on: ubuntu-latest

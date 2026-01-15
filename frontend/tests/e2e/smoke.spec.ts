@@ -6,8 +6,3 @@ test('frontend loads', async ({ page }) => {
 });
 
 
-// TEMPORARY – for CI artifact test
-test('intentional failure', async ({ page }) => {
-  await page.goto('/');
-  await expect(page).toHaveTitle('THIS WILL FAIL');
-});
