@@ -42,7 +42,7 @@ jobs:
         run: |
           mvn spring-boot:run -Dspring-boot.run.profiles=test > backend_log.txt 2>&1 &
           echo "Warten auf Backend..."
-          npx wait-on http://localhost:8080/h2-console --timeout 60000
+          npx wait-on http://localhost:8000/h2-console --timeout 60000
 
       # E2E Tests ausführen
       - name: E2E Tests ausführen
@@ -58,7 +58,6 @@ jobs:
           path: |
             frontend/test-results/
             frontend/playwright-report/
-            backend/backend_log.txt
           if-no-files-found: warn
 
   backend-unit-tests:
