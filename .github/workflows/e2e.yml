@@ -39,6 +39,12 @@ jobs:
           ./mvnw spring-boot:run -Dspring-boot.run.profiles=test > backend_log.txt 2>&1 &
           npx wait-on http://localhost:8000 --timeout 90000 || (cat backend_log.txt && exit 1)
 
+      - name: Start Frontend
+        working-directory: frontend
+        run: |
+          npm run dev &
+          npx wait-on http://localhost:4200 --timeout 120000
+
       - name: Run E2E Tests
         working-directory: frontend
         run: npm run e2e:ci
