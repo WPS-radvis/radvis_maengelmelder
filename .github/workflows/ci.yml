@@ -62,11 +62,14 @@ jobs:
           cd frontend && npm ci
           npx playwright install --with-deps chromium
 
-      - name: Backend & E2E
+      - name: Backend
         run: |
           cd backend && ./mvnw spring-boot:run -Dspring-boot.run.profiles=test > backend_log.txt 2>&1 &
           npx wait-on http://localhost:8000/h2-console --timeout 150000 || (cat backend/backend_log.txt && exit 1)
-          cd ../frontend && npm run e2e:ci
+          
+      - name: E2E Tests ausführen
+          working-directory: frontend
+          run: npm run e2e:ci
 
       - name: Upload Reports
         if: always()
