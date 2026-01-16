@@ -21,17 +21,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 1. Linter
-      - name: Lint Code Base
-        uses: super-linter/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SQLFLUFF_DEFAULT_DIALECT: ansi
-          DISABLE_ERRORS: true
 
-      # 2. Setup
       - name: Java installieren
         uses: actions/setup-java@v4
         with:
@@ -54,7 +44,6 @@ jobs:
         working-directory: frontend
         run: npx playwright install --with-deps chromium
 
-      # 3. Backend & E2E
       - name: Backend starten
         working-directory: backend
         run: |
