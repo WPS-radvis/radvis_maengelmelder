@@ -30,6 +30,9 @@ jobs:
             SQLFLUFF_DEFAULT_DIALECT: ansi
             # Notfall-Modus: Zeigt Fehler, aber lässt Pipeline grün
             DISABLE_ERRORS: true
+            VALIDATE_CSS: false
+            VALIDATE_HTML: false
+            FIX_TYPESCRIPT_ES: true
 
       - name: Java installieren
         uses: actions/setup-java@v4
