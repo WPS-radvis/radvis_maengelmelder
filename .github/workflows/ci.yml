@@ -68,8 +68,8 @@ jobs:
           npx wait-on http://localhost:8000/h2-console --timeout 150000 || (cat backend/backend_log.txt && exit 1)
           
       - name: E2E Tests ausführen
-          working-directory: frontend
-          run: npm run e2e:ci
+        working-directory: frontend
+        run: npm run e2e:ci
 
       - name: Upload Reports
         if: always()
