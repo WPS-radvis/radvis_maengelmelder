@@ -1,18 +1,36 @@
+---
 name: CI
 
 on:
   push:
+    branches: [main, develop]
   pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  statuses: write
+  checks: write
 
 jobs:
-  e2e-tests:
+  lint-and-e2e:
     runs-on: ubuntu-latest
-
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      # Setup für Backend
+      # 1. Linter
+      - name: Lint Code Base
+        uses: super-linter/super-linter@v5
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SQLFLUFF_DEFAULT_DIALECT: ansi
+
+      # 2. Setup
       - name: Java installieren
         uses: actions/setup-java@v4
         with:
@@ -20,7 +38,6 @@ jobs:
           java-version: "21"
           cache: maven
 
-      # Setup für Frontend
       - name: Node.js installieren
         uses: actions/setup-node@v4
         with:
@@ -36,29 +53,25 @@ jobs:
         working-directory: frontend
         run: npx playwright install --with-deps chromium
 
-      # Backend im Hintergrund starten
+      # 3. Backend & E2E
       - name: Backend starten
         working-directory: backend
         run: |
-          mvn spring-boot:run -Dspring-boot.run.profiles=test > backend_log.txt 2>&1 &
-          echo "Warten auf Backend..."
-          npx wait-on http://localhost:8000/h2-console --timeout 60000
+          ./mvnw spring-boot:run -Dspring-boot.run.profiles=test > backend_log.txt 2>&1 &
+          npx wait-on http://localhost:8000/h2-console --timeout 150000 || (cat backend_log.txt && exit 1)
 
-      # E2E Tests ausführen
       - name: E2E Tests ausführen
         working-directory: frontend
         run: npm run e2e:ci
 
-      # Artefakte hochladen
       - name: Upload E2E Artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: frontend-e2e-artifacts
+          name: e2e-reports
           path: |
             frontend/test-results/
             frontend/playwright-report/
-          if-no-files-found: warn
 
   backend-unit-tests:
     runs-on: ubuntu-latest
@@ -75,7 +88,7 @@ jobs:
 
       - name: Backend Build + Unit Tests
         working-directory: backend
-        run: mvn -B -ntp clean verify
+        run: ./mvnw -B -ntp clean verify
 
       - name: Test Reports hochladen
         if: always()
@@ -85,4 +98,3 @@ jobs:
           path: |
             backend/**/target/surefire-reports
             backend/**/target/failsafe-reports
-          if-no-files-found: warn

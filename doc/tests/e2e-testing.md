@@ -27,7 +27,7 @@ Das Backend wird mit dem Profil `test` gestartet. Dies sorgt dafür, dass die H2
 Das Frontend wird im Development-Modus gestartet:
 
 * **Befehl**: `npm run start:frontend
-`
+
 * **URL**: `http://localhost:4200`
 
 ## 3. Ausführung der E2E-Tests
