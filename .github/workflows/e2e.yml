@@ -33,11 +33,11 @@ jobs:
         working-directory: frontend
         run: npx playwright install --with-deps chromium
 
-      - name: Start Backend
+      - name: Start Backend (Test Profile)
         working-directory: backend
         run: |
           ./mvnw spring-boot:run -Dspring-boot.run.profiles=test > backend_log.txt 2>&1 &
-          npx wait-on http://localhost:8000 --timeout 90000 || (cat backend_log.txt && exit 1)
+          npx wait-on http://localhost:8000/h2-console --timeout 150000 || (cat backend_log.txt && exit 1)
 
       - name: Start Frontend
         working-directory: frontend
