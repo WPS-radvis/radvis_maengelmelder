@@ -137,15 +137,10 @@ export class Formular implements OnInit {
     formData.append('longitude', (coords?.lng ?? '').toString());
 
     // Fügt alle ausgewählten Fotos hinzu (Name wie im Originalfile)
-    this.selectedFiles.forEach((file: File) => {
-      formData.append('photos', file, file.name);
-    });
+    for (const file of this.selectedFiles) {
+      formData.append('files', file);
+    }
 
-
-  // Fügt alle ausgewählten Fotos hinzu (Name wie im Originalfile)
-  this.selectedFiles.forEach((file: File) => {
-  formData.append('photos', file, file.name);
-  });
 
     this.isLoading.set(true);
     console.log('Sende FormData ab...');
