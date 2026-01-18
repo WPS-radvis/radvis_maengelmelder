@@ -39,6 +39,8 @@ export class ApiService {
    * @returns Observable mit der Server-Antwort nach dem Erstellen der Meldung
    */
   createReport(data: FormData): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/reports`, data);
+    return this.http.post(`${this.baseUrl}/api/reports`, data,
+    { withCredentials: true }
+  );
   }
 }
