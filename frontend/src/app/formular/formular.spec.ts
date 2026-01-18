@@ -202,14 +202,12 @@ describe('Formular Component', () => {
     expect(createSpy).toHaveBeenCalled();
 
     const formDataSent = createSpy.calls.first().args[0];
-    const blob = formDataSent.get('report') as Blob;
+    const latitude = formDataSent.get('latitude');
+    const longitude = formDataSent.get('longitude');
 
-    blob.text().then((json) => {
-      const obj = JSON.parse(json);
-      expect(obj.latitude).toBe(12.3);
-      expect(obj.longitude).toBe(45.6);
-      done();
-    });
+    expect(latitude).toBe('12.3');
+    expect(longitude).toBe('45.6');
+    done();
   });
   it('T5.25.2: sollte null senden wenn keine Koordinaten gesetzt sind', (done) => {
     reportState.reset();
@@ -224,13 +222,8 @@ describe('Formular Component', () => {
     expect(createSpy).toHaveBeenCalled();
 
     const formDataSent = createSpy.calls.first().args[0];
-    const blob = formDataSent.get('report') as Blob;
-
-    blob.text().then((json) => {
-      const obj = JSON.parse(json);
-      expect(obj.latitude).toBeNull();
-      expect(obj.longitude).toBeNull();
-      done();
-    });
+    expect(formDataSent.get('latitude')).toBe('');
+    expect(formDataSent.get('longitude')).toBe('');
+    done();
   });
 });
