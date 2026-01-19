@@ -128,23 +128,19 @@ export class Formular implements OnInit {
     }
 
     //  Erzeugt den Report-Objekt mit allen Daten des Formulares
-    const report = {
-      issue: this.selectedCategory,
-      description: this.description.trim(),
-      latitude: coords?.lat ?? null,
-      longitude: coords?.lng ?? null
-  };
-    // Verpackt den Report als JSON-BLOB
     const formData = new FormData();
-    formData.append(
-    'report',
-    new Blob([JSON.stringify(report)], { type: 'application/json' })
-  );
 
-  // Fügt alle ausgewählten Fotos hinzu (Name wie im Originalfile)
-  this.selectedFiles.forEach((file: File) => {
-  formData.append('photos', file, file.name);
-  });
+    formData.append('issue', this.selectedCategory ?? '');
+    formData.append('description', this.description.trim());
+
+    formData.append('latitude', (coords?.lat ?? '').toString());
+    formData.append('longitude', (coords?.lng ?? '').toString());
+
+    // Fügt alle ausgewählten Fotos hinzu (Name wie im Originalfile)
+    for (const file of this.selectedFiles) {
+      formData.append('files', file);
+    }
+
 
     this.isLoading.set(true);
     console.log('Sende FormData ab...');
