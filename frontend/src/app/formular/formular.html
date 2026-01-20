@@ -12,11 +12,10 @@
 
   <mat-form-field appearance="outline" class="radmelder-select">
   <mat-label>Mängelkategorie</mat-label>
-    <mat-select [(ngModel)]="selectedCategory" name="category"
-                style="border-bottom: none;">
-      @for (cat of categories; track cat) {
-        <mat-option [value]="cat">{{ cat }}</mat-option>
-      }
+    <mat-select [(ngModel)]="selectedCategory">
+      <mat-option *ngFor="let cat of categories" [value]="cat.value">
+        {{ cat.label }}
+      </mat-option>
     </mat-select>
     </mat-form-field>
 

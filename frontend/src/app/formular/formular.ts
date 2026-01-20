@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { ReportStateService } from '../core/globalService/report-state.service';
+import { Issue } from '../core/model/issue.type';
 
 
 
@@ -47,10 +48,10 @@ import { ReportStateService } from '../core/globalService/report-state.service';
 export class Formular implements OnInit {
 
   /** Die aktuell ausgewählte Kategorie (z. B. „Straßenschaden“) */
-  selectedCategory: string | null = null;
+  selectedCategory: Issue | null = null;
 
   /** Kategorien vom Backend, werden beim Laden des Formulars gefüllt */
-  categories: string[] = [];
+  categories: { value: Issue; label: string } [] = [];
 
   /** Beschreibung des Mangels, die der Nutzer eingibt */
   description: string = '';
@@ -94,7 +95,8 @@ export class Formular implements OnInit {
     // Lädt Kategorien vom Backend beim Start
     this.apiService.getIssue().subscribe({
       next: (response) => {
-        this.categories = response;
+        this.categories = (response as Issue[]).map((issue: Issue) => ({ value: issue, label: this.translateIssue(issue),
+        }));
         console.log('Kategorien vom Backend geladen:', this.categories);
       },
       error: (error) => {
@@ -168,6 +170,30 @@ export class Formular implements OnInit {
       },
     });
   }
+  private translateIssue(issue: Issue): string {
+    switch (issue) {
+      case 'SCHLAGLOCH':
+        return 'Schlagloch';
+      case 'SCHLECHTER_STRASSENBELAG':
+        return 'Schlechter Straßenbelag';
+      case 'BEWUCHS':
+        return 'Bewuchs';
+      case "FEHLENDE_BESCHILDERUNG":
+        return 'Fehlende Beschilderung';
+      case "FALSCHE_BESCHILDERUNG":
+        return 'Falsche Beschilderung';
+      case "POLLER_HINDERNIS":
+        return 'Poller/Hindernis';
+      case "UNKLARE_MARKIERUNG":
+        return 'Unklare Markierung';
+      case "UNEBENHEITEN_BODENWELLEN":
+        return 'Unebenheiten/Bodenwellen';
+      case "KEINE_KATEGORIE":
+        return 'Keine Kategorie';
+      default:
+        return issue;
+    }
+  }
 
   /**
    * Wird aufgerufen, wenn ein Foto über die Kamera aufgenommen wird.
@@ -221,3 +247,5 @@ export class Formular implements OnInit {
     }
   }
 }
+
+
