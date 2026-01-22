@@ -154,13 +154,35 @@
   background: #ffffff;
   transform: translate(-50%, -50%);
 }
+.map-locate-button.leaflet-tip {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1000;
+}
 
-.map-tooltip .mdc-tooltip__surface {
-  background: #111827;
-  color: #ffffff;
-  font-size: 12px;
+.map-locate-button.leaflet-tip .leaflet-tooltip {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: calc(100% + 12px);
+  background: #fff;
+  color: #111;
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
   padding: 4px 8px;
-  border-radius: 6px;
-  max-width: 180px;
-  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.map-locate-button.leaflet-tip:hover .leaflet-tooltip,
+.map-locate-button.leaflet-tip:focus-visible .leaflet-tooltip {
+  opacity: 1;
+  visibility: visible;
 }
