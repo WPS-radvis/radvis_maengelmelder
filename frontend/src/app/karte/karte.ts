@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { ReportStateService } from '../core/globalService/report-state.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgZone } from '@angular/core';
 
 
 @Component({
@@ -82,7 +83,8 @@ export class Karte {
 
   constructor(
     public reportState: ReportStateService,
-    private router: Router
+    private router: Router,
+    private ngZone: NgZone
   ) {}
 
   /**
@@ -130,14 +132,17 @@ export class Karte {
 
     this.map.on('locationfound', (e) => {
       const latLng = e.latlng;
-      console.log('Location found:', latLng.lat, latLng.lng);
-      // Call your function with the latLng
-      this.getCurrentLocation(latLng);
-      console.log(this.currentLocation);
+      this.ngZone.run(() => {
+        console.log('Location found:', latLng.lat, latLng.lng);
+        this.getCurrentLocation(latLng);
+        console.log(this.currentLocation);
+      });
     });
 
     // Aktiviert Click Event auf Karte
-    this.map.on('click', (event: L.LeafletMouseEvent) => this.onMapClick(event));
+    this.map.on('click', (event: L.LeafletMouseEvent) => {
+      this.ngZone.run(() => this.onMapClick(event));
+    });
   }
 
   /**
