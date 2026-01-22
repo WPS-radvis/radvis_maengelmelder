@@ -27,7 +27,7 @@ export class ApiService {
    * @returns Observable mit allen vorhandenen Meldungen vom Backend
    */
   getIssue(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/api/issues`);
+    return this.http.get(`${this.baseUrl}/api/issues`,  { withCredentials: true });
   }
 
   /**
