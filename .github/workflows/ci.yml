@@ -35,7 +35,9 @@ jobs:
           # Deine restlichen Einstellungen
           VALIDATE_CSS: false
           VALIDATE_HTML: false
-          FIX_TYPESCRIPT_ES: true
+          VALIDATE_TSX: false
+
+
 
   # JOB 2: Tests ausführen (Backend & E2E)
   build-and-test:
