@@ -36,7 +36,8 @@ jobs:
           VALIDATE_CSS: false
           VALIDATE_HTML: false
 
-          TYPESCRIPT_ES_CONFIG_FILE: frontend/tsconfig.eslint.json
+          TYPESCRIPT_ES_CONFIG_FILE: /github/workspace/frontend/tsconfig.eslint.json
+
 
   # JOB 2: Tests ausführen (Backend & E2E)
   build-and-test:
