@@ -30,15 +30,14 @@
         <button
           mat-raised-button
           type="button"
-          class="map-locate-button"
+          class="map-locate-button leaflet-tip"
           (click)="useCurrentLocation()"
           [disabled]="isLoadingLocation"
           aria-label="Aktuellen Standort verwenden"
-          matTooltip="Aktuellen Standort wählen"
-          matTooltipPosition="below"
-          matTooltipClass="map-tooltip"
+
         >
           <span class="map-locate-glyph"></span>
+          <span class="leaflet-tooltip">Aktuellen Standort wählen</span>
         </button>
       </div>
 

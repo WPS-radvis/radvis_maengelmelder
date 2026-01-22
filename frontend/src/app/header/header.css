@@ -1,8 +1,7 @@
 :host {
   display: block;
-  max-width: 448px;
   width: 100%;
-  margin: 0 auto 24px;
+  margin: 0;
   box-sizing: border-box;
 }
 
@@ -11,7 +10,6 @@
   align-items: center;
   gap: 12px;
   background: #ffffff;
-  border-radius: 16px;
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
   padding: 12px 20px;
 }
@@ -35,17 +33,25 @@
 }
 
 .header-title-main {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: #374151;
-  margin: 0;
+  color: #1f2937;
 }
 
 .header-title-sub {
   font-size: 0.9rem;
   font-weight: 400;
-  color: #4b5563;
-  margin: 2px 0 0;
+  font-style: italic;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-wappen {
+  height: 14px;
+  width: auto;
+  opacity: 0.85;
 }
 
 @media (max-width: 600px) {
