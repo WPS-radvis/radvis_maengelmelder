@@ -124,3 +124,44 @@ mat-spinner {
 .map-card {
   margin-top: 0 !important;
 }
+
+.page-card {
+  max-width: 448px;
+  width: 100%;
+  margin: 0 auto 24px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.page-card .page-header {
+  margin: 0 !important;
+}
+
+.page-card .header-row {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 12px 20px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.page-card .karte,
+.page-card .formular-container {
+  margin: 0 auto 0;
+  box-shadow: none;
+  border-radius: 0;
+  max-width: none;
+  width: 100%;
+}
+
+.page-card .karte {
+  padding: 16px 20px 24px;
+}
+
+.page-card .formular-container {
+  padding: 12px 20px 24px;
+}
+
