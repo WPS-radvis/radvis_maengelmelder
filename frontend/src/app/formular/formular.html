@@ -24,7 +24,6 @@
        <textarea
          matInput
          [(ngModel)]="description"
-         maxlength="1000"
          placeholder="Beschreiben Sie den Mangel kurz"
          name="descriptionForm"
          rows="4"
@@ -52,7 +51,8 @@
      mat-raised-button
      color="primary"
      class="submit-button"
-     [disabled]="!selectedCategory && description.trim() === ''"
+     [disabled]="(!selectedCategory && description.trim() === '')
+      || description.length > 255 "
      (click)="submitReport(photoUpload)"
    >
      Meldung senden
