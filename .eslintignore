@@ -1,0 +1,2 @@
+frontend/tests/e2e/**/*.ts
+frontend/playwright.config.ts
