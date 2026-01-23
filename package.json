@@ -1,9 +1,13 @@
 {
+  "scripts": {
+    "docs": "compodoc -p tsconfig.json -d documentation"
+  },
   "dependencies": {
     "@types/leaflet": "^1.9.21",
     "leaflet": "^1.9.4"
   },
   "devDependencies": {
-    "@playwright/test": "^1.57.0"
+    "@playwright/test": "^1.57.0",
+    "@compodoc/compodoc": "^1.1.23"
   }
 }
