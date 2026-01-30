@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "docs:frontend": "compodoc -p tsconfig.json -d doc/frontend --disableSourceCode",
+    "doc:serve": "compodoc -s",
     "start:frontend": "ng serve",
     "start:backend": "cd ../backend && ./mvnw spring-boot:run",
     "start:dev": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
