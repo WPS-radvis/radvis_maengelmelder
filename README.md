@@ -44,12 +44,18 @@ Wir nutzen **Compodoc**. Das Tool scannt unseren Code und baut daraus eine schic
 
 ---
 
-### ⚙️ Backend (Java / Spring Boot)
-Hier haben wir zwei Sachen: Einmal den technischen Deep-Dive für den Code und einmal was zum Ausprobieren für die API.
+### ⚙️ Backend (Mock-API)
+Das Backend ist als Spring Boot Mock-Service implementiert. Es stellt die notwendigen Endpunkte für die Radverkehrs-Visualisierung bereit und validiert die Datenstrukturen.
 
-#### Javadoc (Für den Code)
-Wenn du wissen willst, was eine Methode genau macht:
-1. Geh in den `backend` Ordner.
-2. **Generieren:** `./mvn javadoc:javadoc`
-3. **Anschauen:** Öffne einfach `backend/target/reports/apidocs/index.html` im Browser.
+📖 API-Dokumentation
+Die Schnittstellen sind vollständig mit OpenAPI / Swagger dokumentiert. Hier können alle Endpunkte interaktiv ausprobiert werden.
+
+Swagger UI: https://app.swaggerhub.com/apis/YADIGARCC/radvis_maengelmelder/1.0.0
+
+[!IMPORTANT] Voraussetzung: Das Backend muss gestartet sein.
+
+Bash
+cd backend
+./mvnw spring-boot:run
+
 
