@@ -9,6 +9,44 @@ ein Formular ausfüllen und optional Fotos hochladen.
 - 📝 Formular zur Mängelbeschreibung
 - 📷 Foto-Upload (max. 3 Bilder)
 
+## Standortauswahl auf der Karte
+Der Standort des Mängels wird interaktiv über eine Karte ausgewählt.
+Die Koordinaten werden automatisch übernommen.
+![Standortauswahl Karte](images/IMG_3151.PNG)
+
+## Neue Mängelmeldung
+Nutzer können eine neue Meldung erfassen, indem sie:
+- eine Mängelkategorie auswählen
+- eine Beschreibung eingeben
+- optional Fotos hochladen
+![Neue Mängelmeldung Formular](images/IMG_3152.PNG)
+![Ausgefülltes Formular](images/IMG_3154.PNG)
+
+## Übersicht aller gemeldeten Mängel
+Alle gemeldeten Mängel werden auf einer interaktiven Karte angezeigt.
+Jeder Marker repräsentiert eine Meldung.
+![Kartenübersicht](images/IMG_3147.PNG)
+
+## Mängelliste
+Zusätzlich zur Kartenansicht gibt es eine tabllarische Übersicht.
+Die Einträge sind filterbar und zeigen den aktuellen Status.
+![Mängelliste](images/IMG_3148.PNG)
+
+## Detailansicht eines Mangels
+In der Detailansicht sind alle Informationen zu einer Meldung sichtbar:
+- Kategorie
+- Beschreibung
+- Standort
+- Status
+- hochgeladene Fotos
+  Der Status kann hier bearbeitet werden.
+  ![Mängel Details](images/IMG_3149.PNG)
+
+  ## Erfolgreicheen Meldung
+  Nach dem Absenden einer Meldung erhält der Nutzer eine Bestätigung, dass die Meldung erfolgreich übermittelt wurde.
+  ![Erfolgsmeldung](images/IMG_3158.PNG)
+
+
 ## Tech-Stack
 -Angular
 -Angular Material
@@ -19,6 +57,7 @@ Java Backend (REST)
   - npm install
   - npm start
   - Frontend läuft unter: https://localhost4200
+  
 # 🚲 RadVis Mängelmelder – Projektdokumentation
 
 Dieses Repository enthält das System zur Erfassung und Visualisierung von Radverkehrs-Mängeln. Um die Wartbarkeit des Codes zu gewährleisten, setzen wir auf automatisierte Dokumentations-Tools für das Frontend und das Backend.
