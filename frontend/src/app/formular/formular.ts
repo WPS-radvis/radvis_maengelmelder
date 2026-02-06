@@ -132,7 +132,12 @@ export class Formular implements OnInit {
     //  Erzeugt den Report-Objekt mit allen Daten des Formulares
     const formData = new FormData();
 
-    formData.append('issue', this.selectedCategory ?? '');
+    const issueEnum = this.selectedCategory
+      ? this.labelToIssue(this.selectedCategory)
+      : 'KEINE_KATEGORIE';
+
+    formData.append('issue', issueEnum);
+
     formData.append('description', this.description.trim());
 
     formData.append('latitude', (coords?.lat ?? '').toString());
@@ -192,6 +197,21 @@ export class Formular implements OnInit {
         return 'Keine Kategorie';
       default:
         return issue;
+    }
+  }
+  private labelToIssue(label: string): Issue {
+    switch (label) {
+      case 'Schlagloch': return 'SCHLAGLOCH';
+      case 'Schlechter Straßenbelag': return 'SCHLECHTER_STRASSENBELAG';
+      case 'Bewuchs': return 'BEWUCHS';
+      case 'Fehlende Beschilderung': return 'FEHLENDE_BESCHILDERUNG';
+      case 'Falsche Beschilderung': return 'FALSCHE_BESCHILDERUNG';
+      case 'Poller/Hindernis': return 'POLLER_HINDERNIS';
+      case 'Unklare Markierung': return 'UNKLARE_MARKIERUNG';
+      case 'Unebenheiten/Bodenwellen': return 'UNEBENHEITEN_BODENWELLEN';
+      case 'Keine Kategorie': return 'KEINE_KATEGORIE';
+      default:
+        return 'KEINE_KATEGORIE'; // ← mejor que throw en producción
     }
   }
 
