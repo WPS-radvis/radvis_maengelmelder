@@ -9,16 +9,51 @@ ein Formular ausfüllen und optional Fotos hochladen.
 - 📝 Formular zur Mängelbeschreibung
 - 📷 Foto-Upload (max. 3 Bilder)
 
-## Tech-Stack
--Angular
--Angular Material
-Java Backend (REST)
+## Standortauswahl auf der Karte
+Der Standort des Mängels wird interaktiv über eine Karte ausgewählt.
+Die Koordinaten werden automatisch übernommen.
+![Standortauswahl Karte](images/IMG_3151.PNG)
+
+## Neue Mängelmeldung
+Nutzer können eine neue Meldung erfassen, indem sie:
+- eine Mängelkategorie auswählen
+- eine Beschreibung eingeben
+- optional Fotos hochladen
+![Neue Mängelmeldung Formular](images/IMG_3152.PNG)
+![Ausgefülltes Formular](images/IMG_3154.PNG)
+
+## Erfolgreicheen Meldung
+  Nach dem Absenden einer Meldung erhält der Nutzer eine Bestätigung, dass die Meldung erfolgreich übermittelt wurde.
+  ![Erfolgsmeldung](images/IMG_3158.PNG)
+
 
 ## Installation
-- ```bash
-  - npm install
-  - npm start
-  - Frontend läuft unter: https://localhost4200
+Folgen Sie diesen Schritten, um das Projekt lokal zu starten.
+
+## Projekt klonen
+```bash
+git clone https://github.com/WPS-radvis/radvis_maengelmelder.git
+cd radvis_maengelmelder
+```
+## Frontend installieren und starten
+1. In den Frontend-Ordner wechseln:
+```bash
+cd frontend
+```
+2. Abhängigkeiten installieren:
+```bash
+npm install
+```
+3. Frontend starten:
+```bash
+npm run start:frontend
+```
+Das Frontend läuft anschließend unter:
+```
+http://localhost:4200
+```
+
+
 # 🚲 RadVis Mängelmelder – Projektdokumentation
 
 Dieses Repository enthält das System zur Erfassung und Visualisierung von Radverkehrs-Mängeln. Um die Wartbarkeit des Codes zu gewährleisten, setzen wir auf automatisierte Dokumentations-Tools für das Frontend und das Backend.
