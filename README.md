@@ -21,20 +21,26 @@ Die **Mängelmelder-App** ermöglicht es Nutzer:innen, Infrastrukturmängel im R
 
 Der Standort des Mangels wird interaktiv über eine Karte ausgewählt. Die Koordinaten werden automatisch übernommen.
 
-![Standortauswahl Karte](images/Bild4.jpg)
+<img width="366" height="733" alt="Kopie von WPS RadVIS (1)" src="https://github.com/user-attachments/assets/2eed6b18-9d5d-4210-8ea1-6edee755a16e" />
+
+<img width="366" height="733" alt="Kopie von WPS RadVIS (2)" src="https://github.com/user-attachments/assets/83c432bb-8828-4f4f-be99-b2194760c6d1" />
+
 
 ### Neue Mängelmeldung
 
 Nutzer:innen können eine neue Meldung erfassen, indem sie eine Kategorie auswählen, eine Beschreibung eingeben und optional Fotos hochladen.
 
-![Neue Mängelmeldung – Formular](images/Bild3.jpg)
-![Neue Mängelmeldung – ausgefüllt](images/Bild2.JPG)
+<img width="366" height="733" alt="Kopie von WPS RadVIS (3)" src="https://github.com/user-attachments/assets/0aafdaa8-463d-4abd-980c-a8e0ef6eba3d" />
+
 
 ### Erfolgreiche Meldung
 
 Nach dem Absenden erhält der/die Nutzer:in eine Bestätigung über die erfolgreiche Übermittlung.
 
-![Erfolgsmeldung](images/Bild1.jpg)
+<img width="366" height="733" alt="Kopie von WPS RadVIS (4)" src="https://github.com/user-attachments/assets/8ac354a3-ffd6-480d-ab5a-6fe1e186df00" />
+
+
+
 
 ---
 
