@@ -1,138 +1,116 @@
-# 🚲 RadVIS - Mängelmeldung per Karten-Klick 
-Diese Anwendung ist die **User-App zur Erfassung von Infrastrukturmängeln** im Radverkehr.
-Nutzer:innen können über eine interaktive Karte einen Standort auswählen, eine Beschreibung eingeben und optional Fotos hochladen.
+# 🚲 RadVIS – Mängelmeldung per Karten-Klick
 
-Die App ist Teil des übergeordneten **RadVIS-Projekts**.
-Das eigentliche **RadVIS-System zur Verwaltung, Analyse und Visualisierung der Meldungen befindet sich in einem **seperaten Repository**.
+Die **Mängelmelder-App** ermöglicht es Nutzer:innen, Infrastrukturmängel im Radverkehr über eine interaktive Karte zu erfassen. Sie ist Teil des übergeordneten **RadVIS-Projekts** – dieses Repository enthält ausschließlich die Mängelmelder-App (Frontend + Mock-Backend).
 
-Dieses Repository enthält ausschließlich die **Mängelmelder-App (Frontend + Mock-Backend)**.
-
-Das in diesem Repository enthaltene Backend dient als **Mock-Service für Entwicklung, Tests und Demos**.
-Das produktive RadVIS-Backend befindet sich in einem **seperaten Repository**.
+> **Hinweis:** Das produktive RadVIS-Backend zur Verwaltung, Analyse und Visualisierung der Meldungen befindet sich in einem separaten Repository.
 
 ---
 
 ## Features
-- 📍 Standortauswahl per Karten-Klick
-- 📌 Marker wird auf der Karte gesetzt
-- 📝 Formular zur Mängelbeschreibung
+
+- 📍 Standortauswahl per Karten-Klick mit automatischer Koordinatenübernahme
+- 📌 Marker-Platzierung auf der Karte
+- 📝 Formular zur Mängelbeschreibung mit Kategorieauswahl
 - 📷 Foto-Upload (max. 3 Bilder)
 
 ---
 
-## Standortauswahl auf der Karte
-Der Standort des Mängels wird interaktiv über eine Karte ausgewählt.
-Die Koordinaten werden automatisch übernommen.
+## Screenshots
 
-![Standortauswahl Karte](images/Bild4.jpg)
+### Standortauswahl auf der Karte
+
+Der Standort des Mangels wird interaktiv über eine Karte ausgewählt. Die Koordinaten werden automatisch übernommen.
+
+<img width="366" height="733" alt="Kopie von WPS RadVIS (1)" src="https://github.com/user-attachments/assets/2eed6b18-9d5d-4210-8ea1-6edee755a16e" />
+
+<img width="366" height="733" alt="Kopie von WPS RadVIS (2)" src="https://github.com/user-attachments/assets/83c432bb-8828-4f4f-be99-b2194760c6d1" />
+
+
+### Neue Mängelmeldung
+
+Nutzer:innen können eine neue Meldung erfassen, indem sie eine Kategorie auswählen, eine Beschreibung eingeben und optional Fotos hochladen.
+
+<img width="366" height="733" alt="Kopie von WPS RadVIS (3)" src="https://github.com/user-attachments/assets/0aafdaa8-463d-4abd-980c-a8e0ef6eba3d" />
+
+
+### Erfolgreiche Meldung
+
+Nach dem Absenden erhält der/die Nutzer:in eine Bestätigung über die erfolgreiche Übermittlung.
+
+<img width="366" height="733" alt="Kopie von WPS RadVIS (4)" src="https://github.com/user-attachments/assets/8ac354a3-ffd6-480d-ab5a-6fe1e186df00" />
+
+
+
 
 ---
-
-
-## Neue Mängelmeldung
-Nutzer können eine neue Meldung erfassen, indem sie:
-
-- eine Mängelkategorie auswählen
-- eine Beschreibung eingeben
-- optional Fotos hochladen
-- 
-![Neue Mängelmeldung Formular](images/Bild3.jpg)
-
-![Ausgefülltes Formular](images/Bild2.JPG)
-
----
-
-
-## Erfolgreicheen Meldung
-  Nach dem Absenden einer Meldung erhält der Nutzer eine Bestätigung, dass die Meldung erfolgreich übermittelt wurde.
-  
-  ![Erfolgsmeldung](images/Bild1.jpg)
-
-  ---
-  
 
 ## Tech-Stack
-**Frontend**
--Angular
--Angular Material
--Leaflet (Karten)
 
-**Backend (Mock-Service)**
--Java
--Spring Boot
--REST-API
+| Bereich | Technologien |
+|---|---|
+| **Frontend** | Angular, Angular Material, Leaflet (Karten) |
+| **Backend (Mock-Service)** | Java, Spring Boot, REST-API |
 
-Das Backend dient ausschließlich als **Mock-Service für Entwicklung und Demo** und ersetzt nicht das produktive RadVIS-Backend.
+> Das Backend dient ausschließlich als **Mock-Service** für Entwicklung und Demo und ersetzt nicht das produktive RadVIS-Backend.
 
 ---
 
 ## Installation
 
-## Projekt klonen
+### Voraussetzungen
+
+- [Node.js](https://nodejs.org/) (LTS empfohlen)
+- [Java 17+](https://adoptium.net/) (für das Mock-Backend)
+- [Maven](https://maven.apache.org/) oder der enthaltene Maven-Wrapper
+
+### Projekt klonen
+
 ```bash
 git clone https://github.com/WPS-radvis/radvis_maengelmelder.git
 cd radvis_maengelmelder
 ```
-## Frontend installieren und starten
-1. In den Frontend-Ordner wechseln:
+
+### Frontend starten
+
 ```bash
 cd frontend
-```
-2. Abhängigkeiten installieren:
-```bash
 npm install
-```
-3. Frontend starten:
-```bash
 npm run start:frontend
 ```
-Das Frontend läuft anschließend unter:
-```
-http://localhost:4200
-```
 
+Das Frontend läuft anschließend unter: **http://localhost:4200**
 
-# 🚲 RadVis Mängelmelder – Projektdokumentation
+### Backend starten
 
-Um die Wartbarkeit des Codes zu gewährleisten, setzen wir auf automatisierte Dokumentations-Tools für das Frontend und das Backend.
-
----
-
-# 🚲 RadVis Mängelmelder – Doku-Guide
-
-Damit wir beim Coden nicht den Überblick verlieren und neue Leute sich schnell zurechtfinden, schreiben wir unsere Doku nicht von Hand, sondern lassen sie uns generieren. Hier steht, wie du das machst.
-
----
-
-## 🛠 So kriegst du die Doku
-
-### 🎨 Frontend (Angular - Mängelmelder-App)
-Wir nutzen **Compodoc**. Das Tool scannt unseren Code und baut daraus eine schicke Website, auf der man sieht, wie Komponenten und Module zusammenhängen.
-
-Diese Dokumentation bezieht sich **ausschließlich auf das Frontend der Mängelmelder-App**.
-
-1. Geh in den `frontend` Ordner.
-2. **Doku bauen:** `npm run docs:frontend`
-3. **Doku anschauen:** `npx compodoc -s -d doc/frontend` (läuft dann auf [http://localhost:8080](http://localhost:8080))
-
-> **Info:** Wir verstecken den echten Quellcode in der Doku (`--disableSourceCode`), damit es übersichtlich bleibt und man nur die Beschreibungen sieht.
-
----
-
-### ⚙️ Backend (Mock-API)
-Das Backend ist als Spring Boot Mock-Service implementiert. Es stellt die notwendigen Endpunkte für die Radverkehrs-Visualisierung bereit und validiert die Datenstrukturen.
-
-Es handelt sich **nicht um das produktive RadVIS-Backend**.
-
-📖 API-Dokumentation
-Die Schnittstellen sind vollständig mit OpenAPI / Swagger dokumentiert. Hier können alle Endpunkte interaktiv ausprobiert werden.
-
-Swagger UI: https://app.swaggerhub.com/apis/YADIGARCC/radvis_maengelmelder/1.0.0
-
-[!IMPORTANT] Voraussetzung: Das Backend muss gestartet sein.
-
-Bash
+```bash
 cd backend
 ./mvnw spring-boot:run
+```
 
+---
 
+## Dokumentation
+
+### 🎨 Frontend (Compodoc)
+
+Die Frontend-Dokumentation wird mit [Compodoc](https://compodoc.app/) generiert. Das Tool scannt den Code und erstellt eine übersichtliche Darstellung aller Komponenten und Module.
+
+```bash
+cd frontend
+
+# Doku generieren
+npm run docs:frontend
+
+# Doku im Browser öffnen (http://localhost:8080)
+npx compodoc -s -d doc/frontend
+```
+
+> **Info:** Der Quellcode wird in der Doku ausgeblendet (`--disableSourceCode`), sodass nur die Beschreibungen sichtbar sind.
+
+### ⚙️ Backend (Swagger / OpenAPI)
+
+Die API-Dokumentation ist vollständig mit OpenAPI / Swagger dokumentiert. Alle Endpunkte können interaktiv ausprobiert werden:
+
+🔗 [Swagger UI auf SwaggerHub](https://app.swaggerhub.com/apis/YADIGARCC/radvis_maengelmelder/1.0.0)
+
+> **Wichtig:** Das Backend muss gestartet sein, damit die Endpunkte erreichbar sind.
