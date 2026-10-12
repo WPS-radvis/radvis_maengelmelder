@@ -234,7 +234,11 @@ export class Karte {
         console.log('Standort über Button geholt:', lat, lng);
 
         // Karte auf Standort setzen
-        this.map.flyTo([lat, lng], 150);
+        this.map.flyTo([lat, lng], 16);
+
+        setTimeout(() => {
+          this.map.invalidateSize();
+        }, 200);
 
         // Marker setzen
         this.setMarker(lat, lng);
